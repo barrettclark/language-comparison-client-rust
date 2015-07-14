@@ -2,3 +2,6 @@
 name = "client"
 version = "0.1.0"
 authors = ["Barrett Clark <barrett@websitesbybarrett.com>"]
+
+[dependencies]
+hyper = "0.6.4"

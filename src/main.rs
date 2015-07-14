@@ -1,23 +1,30 @@
 extern crate hyper;
+extern crate rustc_serialize;
 
 use std::io::Read;
 use hyper::Client;
 use hyper::header::Connection;
+use rustc_serialize::json;
+
+#[derive(Debug, RustcDecodable, RustcEncodable)]
+struct Payload {
+    name: String,
+    pi: f32,
+    best_number: u32,
+    right_now: String,
+}
 
 fn main() {
-    // Create a client.
     let client = Client::new();
 
-    // Creating an outgoing request.
     let mut res = client.get("http://localhost:9292/")
-        // set a header
         .header(Connection::close())
-        // let 'er go!
         .send().unwrap();
 
-    // Read the Response.
     let mut body = String::new();
     res.read_to_string(&mut body).unwrap();
 
-    println!("Response: {}", body);
+    let payload: Payload = json::decode(&body).unwrap();
+
+    println!("{:?}", payload);
 }

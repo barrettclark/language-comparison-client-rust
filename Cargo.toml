@@ -5,3 +5,4 @@ authors = ["Barrett Clark <barrett@websitesbybarrett.com>"]
 
 [dependencies]
 hyper = "0.6.4"
+rustc-serialize = "0.3.15"
